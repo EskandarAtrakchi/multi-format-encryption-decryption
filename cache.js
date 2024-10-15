@@ -57,6 +57,15 @@ function blobToArrayBuffer(blob) {
     });
 }
 
+// Function to update the file selection dropdown
+function updateFileSelect(fileName) {
+    const fileSelect = document.getElementById("fileSelect");
+    const option = document.createElement("option");
+    option.value = fileName;
+    option.textContent = fileName;
+    fileSelect.appendChild(option);
+}
+
 // Store file in the cache (with encryption and hash for integrity)
 async function storeFileInCache(file) {
     const fileBuffer = await blobToArrayBuffer(file); // Convert file to ArrayBuffer
@@ -73,6 +82,9 @@ async function storeFileInCache(file) {
 
     console.log(`File stored in cache: ${file.name}`);
     document.getElementById("output").innerText = `File stored: ${file.name}`;
+
+    // Update the dropdown with the new file
+    updateFileSelect(file.name);
 }
 
 // Retrieve and decrypt file from the cache
@@ -87,7 +99,7 @@ async function retrieveFileFromCache(fileName) {
         // Check integrity
         if (recalculatedHash === cacheEntry.hash) {
             console.log(`File retrieved and integrity verified: ${fileName}`);
-            
+
             // Create a Blob from the decrypted data and display the file
             const blob = new Blob([decryptedData], { type: cacheEntry.mimeType });
             const url = URL.createObjectURL(blob);
@@ -128,7 +140,7 @@ async function retrieveFileFromCache(fileName) {
 document.getElementById("store").addEventListener("click", async () => {
     const fileInput = document.getElementById("fileInput");
     const file = fileInput.files[0];
-    
+
     if (file) {
         await storeFileInCache(file);
     } else {
@@ -138,13 +150,13 @@ document.getElementById("store").addEventListener("click", async () => {
 });
 
 document.getElementById("retrieve").addEventListener("click", async () => {
-    const fileInput = document.getElementById("fileInput");
-    const file = fileInput.files[0];
+    const fileSelect = document.getElementById("fileSelect");
+    const fileName = fileSelect.value;
 
-    if (file) {
-        await retrieveFileFromCache(file.name);
+    if (fileName) {
+        await retrieveFileFromCache(fileName);
     } else {
-        console.log('No file selected');
+        console.log('No file selected for retrieval');
         document.getElementById("output").innerText = 'No file selected for retrieval';
     }
 });
