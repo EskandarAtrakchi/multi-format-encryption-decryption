@@ -1,3 +1,7 @@
+
+// Define the maximum file size limit (in bytes), e.g., 5 MB
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
 // Hash Table (Map) to store cached data
 const cache = new Map();
 
@@ -66,34 +70,55 @@ function updateFileSelect(fileName) {
     fileSelect.appendChild(option);
 }
 
-// Store file in the cache (with encryption and hash for integrity)
+// Store file in the cache and localStorage (with encryption and hash for integrity)
 async function storeFileInCache(file) {
+    // Check if the file exceeds the maximum size
+    if (file.size > MAX_FILE_SIZE) {
+        alert(`The file "${file.name}" is too large (${(file.size / (1024 * 1024)).toFixed(2)} MB). Maximum allowed size is 5 MB.`);
+        return; // Do not proceed with storing
+    }
+
     const fileBuffer = await blobToArrayBuffer(file); // Convert file to ArrayBuffer
     const encryptionKey = await secretKey;
     const { iv, encryptedData } = await encryptData(fileBuffer, encryptionKey);
     const fileHash = await hashData(fileBuffer);
 
-    cache.set(file.name, {
-        iv: iv,
-        encryptedData: encryptedData,
+    const fileEntry = {
+        iv: Array.from(iv), // Store IV as array
+        encryptedData: Array.from(new Uint8Array(encryptedData)), // Convert to array for storage
         hash: fileHash,
         mimeType: file.type // Store file type (e.g., image/jpeg, application/pdf)
-    });
+    };
 
-    console.log(`File stored in cache: ${file.name}`);
-    document.getElementById("output").innerText = `File stored: ${file.name}`;
+    // Save to cache (in memory)
+    cache.set(file.name, fileEntry);
 
-    // Update the dropdown with the new file
-    updateFileSelect(file.name);
+    try {
+        // Save to localStorage (persistent storage)
+        localStorage.setItem(file.name, JSON.stringify(fileEntry));
+
+        console.log(`File stored in cache: ${file.name}`);
+        document.getElementById("output").innerText = `File stored: ${file.name}`;
+
+        // Update the dropdown with the new file
+        updateFileSelect(file.name);
+    } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+            alert(`Failed to store the file "${file.name}". The file is too large or localStorage is full.`);
+            console.error('QuotaExceededError: Failed to store file in localStorage.');
+        } else {
+            console.error('Error storing file in localStorage:', e);
+        }
+    }
 }
 
-// Retrieve and decrypt file from the cache
+// Retrieve and decrypt file from the cache or localStorage
 async function retrieveFileFromCache(fileName) {
-    const cacheEntry = cache.get(fileName);
+    let cacheEntry = cache.get(fileName) || JSON.parse(localStorage.getItem(fileName));
 
     if (cacheEntry) {
         const encryptionKey = await secretKey;
-        const decryptedData = await decryptData(cacheEntry.encryptedData, cacheEntry.iv, encryptionKey);
+        const decryptedData = await decryptData(new Uint8Array(cacheEntry.encryptedData), new Uint8Array(cacheEntry.iv), encryptionKey);
         const recalculatedHash = await hashData(decryptedData);
 
         // Check integrity
