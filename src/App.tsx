@@ -48,7 +48,9 @@ export default function Component() {
 
       // Display the retrieved file based on its type
       if (fileBlob.type.startsWith("image/")) {
-        setOutput(<img src={url} alt={fileName} />);
+        setOutput(
+          <img src={url} alt={fileName} className="mt-4 rounded-md shadow-lg" />
+        );
       } else if (fileBlob.type === "application/pdf") {
         setOutput(
           <iframe
@@ -56,11 +58,16 @@ export default function Component() {
             width="100%"
             height="600px"
             title={fileName}
+            className="mt-4 border border-gray-300 rounded-md shadow-md"
           ></iframe>
         );
       } else {
         setOutput(
-          <a href={url} download={fileName}>
+          <a
+            href={url}
+            download={fileName}
+            className="text-blue-600 underline mt-4"
+          >
             Download {fileName}
           </a>
         );
@@ -72,41 +79,49 @@ export default function Component() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6 text-center">
+    <div className="max-w-lg mx-auto mt-10 p-6 bg-gray-50 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
         Upload and Securely Cache Files
       </h1>
 
       {/* File Upload */}
       <div className="mb-8">
-        <p className="mb-2">Select a file to upload:</p>
+        <p className="mb-2 text-gray-700">Select a file to upload:</p>
         <div className="flex items-center gap-2 mb-4">
           <Input
             type="file"
             onChange={handleFileChange}
-            className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+            className="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer"
           />
         </div>
         <Button
           onClick={handleStoreFile}
           disabled={!selectedFile}
-          className="w-full"
+          className={`w-full py-2 rounded-lg transition-colors duration-300 ${
+            selectedFile
+              ? "bg-blue-600 hover:bg-blue-700 text-white"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
         >
           Store File in Cache
         </Button>
       </div>
 
       {/* File Retrieval */}
-      <h2 className="text-xl font-bold mb-4">Retrieve a File</h2>
+      <h2 className="text-xl font-bold mb-4 text-gray-800">Retrieve a File</h2>
       <div className="mb-4">
-        <p className="mb-2">Select a file to retrieve:</p>
+        <p className="mb-2 text-gray-700">Select a file to retrieve:</p>
         <Select onValueChange={handleRetrieveFile}>
-          <SelectTrigger>
+          <SelectTrigger className="border border-gray-300 rounded-lg shadow-sm">
             <SelectValue placeholder="Select a file to retrieve" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-white shadow-lg rounded-lg border border-gray-300">
             {retrieveOptions.map((option) => (
-              <SelectItem key={option} value={option}>
+              <SelectItem
+                key={option}
+                value={option}
+                className="hover:bg-blue-100"
+              >
                 {option}
               </SelectItem>
             ))}
@@ -115,7 +130,7 @@ export default function Component() {
       </div>
 
       {/* Output section for displaying retrieved files */}
-      <div className="output-section mt-4">{output}</div>
+      <div className="output-section mt-4 text-center">{output}</div>
     </div>
   );
 }
