@@ -7,7 +7,7 @@
    - The key is generated using `window.crypto.subtle.generateKey` with the `AES-GCM` algorithm and a key length of 256 bits.
    - The encryption is done using the `window.crypto.subtle.encrypt` function, with a randomly generated **Initialization Vector (IV)** for each encryption operation. The IV ensures that even if the same data is encrypted multiple times, the ciphertext will be different.
    - The decryption process uses `window.crypto.subtle.decrypt` with the same IV and key to decrypt the data.
-
+ 
 ### 2. **SHA-256 Hashing (Integrity)**
    - **SHA-256 (Secure Hash Algorithm 256-bit)** is used to create a hash of the file's contents. Hashing ensures **data integrity** by providing a unique fingerprint of the data.
    - The `hashData` function uses `window.crypto.subtle.digest` with the SHA-256 algorithm to compute the hash of the file. The hash is then Base64-encoded and stored with the encrypted file.
