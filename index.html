@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet"  href="style.css" />
+    <link rel="stylesheet" href="style.css" />
     <title>Secure Caching System</title>
 </head>
 <body>
@@ -23,7 +22,46 @@
     <button id="retrieve">Retrieve File from Cache</button>
 
     <div id="output"></div>
-    
+
+    <!-- Modal for file stored -->
+    <div id="storeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="storeClose">&times;</span>
+            <p id="storeModalText">File stored successfully!</p>
+        </div>
+    </div>
+
+    <!-- Modal for file retrieved -->
+    <div id="retrieveModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="retrieveClose">&times;</span>
+            <p id="retrieveModalText">File retrieved successfully!</p>
+        </div>
+    </div>
+
     <script src="cache.js"></script>
+    <script>
+        // On page load, repopulate fileSelect with stored files
+        window.addEventListener('load', () => {
+        // Clear the dropdown first to avoid duplicates
+        const fileSelect = document.getElementById("fileSelect");
+        fileSelect.innerHTML = '<option value="" disabled selected>Select a file to retrieve</option>';
+
+        // Iterate over localStorage and populate the dropdown with file names
+        for (let i = 0; i < localStorage.length; i++) {
+            const fileName = localStorage.key(i);
+            updateFileSelect(fileName);
+        }
+        });
+
+        // Function to update the file selection dropdown
+        function updateFileSelect(fileName) {
+            const fileSelect = document.getElementById("fileSelect");
+            const option = document.createElement("option");
+            option.value = fileName;
+            option.textContent = fileName;
+            fileSelect.appendChild(option);
+        }
+    </script>
 </body>
 </html>

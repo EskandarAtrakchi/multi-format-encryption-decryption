@@ -1,19 +1,42 @@
-
 // Define the maximum file size limit (in bytes), e.g., 5 MB
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
 // Hash Table (Map) to store cached data
 const cache = new Map();
 
-// Secret key for encryption/decryption (in a real app, this would be securely stored)
-const secretKey = window.crypto.subtle.generateKey(
-    {
-        name: "AES-GCM",
-        length: 256,
-    },
-    true, // Extractable
-    ["encrypt", "decrypt"]
-);
+// Function to persist or retrieve the encryption key
+async function getSecretKey() {
+    const storedKey = localStorage.getItem('encryptionKey');
+
+    if (storedKey) {
+        // Convert the stored key back to CryptoKey
+        return await window.crypto.subtle.importKey(
+            "jwk", // Key format
+            JSON.parse(storedKey), // Stored key
+            {
+                name: "AES-GCM",
+            },
+            true, // Extractable
+            ["encrypt", "decrypt"]
+        );
+    } else {
+        // Generate a new key if none is stored
+        const newKey = await window.crypto.subtle.generateKey(
+            {
+                name: "AES-GCM",
+                length: 256,
+            },
+            true, // Extractable
+            ["encrypt", "decrypt"]
+        );
+
+        // Export the key and save it to localStorage
+        const exportedKey = await window.crypto.subtle.exportKey("jwk", newKey);
+        localStorage.setItem('encryptionKey', JSON.stringify(exportedKey));
+
+        return newKey;
+    }
+}
 
 // Function to encrypt data (Confidentiality)
 async function encryptData(data, key) {
@@ -70,6 +93,50 @@ function updateFileSelect(fileName) {
     fileSelect.appendChild(option);
 }
 
+// Function to display the "file stored" modal with encryption details
+function showStoreModal(fileName, fileHash, iv) {
+    const storeModal = document.getElementById("storeModal");
+    const storeModalText = document.getElementById("storeModalText");
+    storeModalText.innerHTML = `
+        File "${fileName}" stored successfully!<br />
+        <strong>Hash:</strong> ${fileHash}<br />
+        <strong>IV:</strong> ${Array.from(iv).join(', ')}
+    `;
+    storeModal.style.display = "block";
+}
+
+// Function to display the "file retrieved" modal with encryption details
+function showRetrieveModal(fileName, fileHash, iv) {
+    const retrieveModal = document.getElementById("retrieveModal");
+    const retrieveModalText = document.getElementById("retrieveModalText");
+    retrieveModalText.innerHTML = `
+        File "${fileName}" retrieved successfully!<br />
+        <strong>Hash:</strong> ${fileHash}<br />
+        <strong>IV:</strong> ${Array.from(iv).join(', ')}
+    `;
+    retrieveModal.style.display = "block";
+}
+
+// Close modals when the close button is clicked
+document.getElementById("storeClose").addEventListener("click", function () {
+    document.getElementById("storeModal").style.display = "none";
+});
+document.getElementById("retrieveClose").addEventListener("click", function () {
+    document.getElementById("retrieveModal").style.display = "none";
+});
+
+// Close modals if clicked outside of them
+window.addEventListener("click", function (event) {
+    const storeModal = document.getElementById("storeModal");
+    const retrieveModal = document.getElementById("retrieveModal");
+    if (event.target === storeModal) {
+        storeModal.style.display = "none";
+    }
+    if (event.target === retrieveModal) {
+        retrieveModal.style.display = "none";
+    }
+});
+
 // Store file in the cache and localStorage (with encryption and hash for integrity)
 async function storeFileInCache(file) {
     // Check if the file exceeds the maximum size
@@ -79,7 +146,7 @@ async function storeFileInCache(file) {
     }
 
     const fileBuffer = await blobToArrayBuffer(file); // Convert file to ArrayBuffer
-    const encryptionKey = await secretKey;
+    const encryptionKey = await getSecretKey(); // Use the saved key or generate a new one
     const { iv, encryptedData } = await encryptData(fileBuffer, encryptionKey);
     const fileHash = await hashData(fileBuffer);
 
@@ -102,6 +169,9 @@ async function storeFileInCache(file) {
 
         // Update the dropdown with the new file
         updateFileSelect(file.name);
+
+        // Show modal with encryption details
+        showStoreModal(file.name, fileHash, iv);
     } catch (e) {
         if (e.name === 'QuotaExceededError') {
             alert(`Failed to store the file "${file.name}". The file is too large or localStorage is full.`);
@@ -117,7 +187,7 @@ async function retrieveFileFromCache(fileName) {
     let cacheEntry = cache.get(fileName) || JSON.parse(localStorage.getItem(fileName));
 
     if (cacheEntry) {
-        const encryptionKey = await secretKey;
+        const encryptionKey = await getSecretKey(); // Use the saved key or generate a new one
         const decryptedData = await decryptData(new Uint8Array(cacheEntry.encryptedData), new Uint8Array(cacheEntry.iv), encryptionKey);
         const recalculatedHash = await hashData(decryptedData);
 
@@ -151,6 +221,9 @@ async function retrieveFileFromCache(fileName) {
                 document.getElementById("output").appendChild(a);
             }
 
+            // Show modal with encryption details
+            showRetrieveModal(fileName, cacheEntry.hash, cacheEntry.iv);
+
         } else {
             console.log('File integrity check failed!');
             document.getElementById("output").innerText = `Integrity check failed for: ${fileName}`;
@@ -168,9 +241,6 @@ document.getElementById("store").addEventListener("click", async () => {
 
     if (file) {
         await storeFileInCache(file);
-    } else {
-        console.log('No file selected');
-        document.getElementById("output").innerText = 'No file selected';
     }
 });
 
@@ -180,8 +250,5 @@ document.getElementById("retrieve").addEventListener("click", async () => {
 
     if (fileName) {
         await retrieveFileFromCache(fileName);
-    } else {
-        console.log('No file selected for retrieval');
-        document.getElementById("output").innerText = 'No file selected for retrieval';
     }
 });
