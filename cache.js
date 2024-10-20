@@ -252,3 +252,17 @@ document.getElementById("retrieve").addEventListener("click", async () => {
         await retrieveFileFromCache(fileName);
     }
 });
+
+
+document.getElementById("clearStorage").addEventListener("click", function () {
+    // Clear all files and keys from localStorage
+    localStorage.clear(); // This clears everything from localStorage
+
+    // Clear the dropdown options
+    const fileSelect = document.getElementById("fileSelect");
+    fileSelect.innerHTML = '<option value="" disabled selected>Select a file to retrieve</option>'; // Reset dropdown
+
+    window.location.reload();
+    // Notify the user
+    alert("All stored files and keys have been cleared.");
+});
