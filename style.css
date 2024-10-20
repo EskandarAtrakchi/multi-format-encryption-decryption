@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #12022b;
+    background-color: #0f0224;
     color: #333;
     margin: 0;
     padding: 20px;
@@ -220,19 +220,19 @@ a:hover {
 }
 
 .btn-53:hover span:nth-child(3) {
-  transition-delay: 0.2s;
+  transition-delay: 0.82s;
 }
 
 .btn-53:hover span:nth-child(4) {
-  transition-delay: 0.3s;
+  transition-delay: 0.73s;
 }
 
 .btn-53:hover span:nth-child(5) {
-  transition-delay: 0.4s;
+  transition-delay: 0.64s;
 }
 
 .btn-53:hover span:nth-child(6) {
-  transition-delay: 0.5s;
+  transition-delay: 1.0s;
 }
 
 /* From Uiverse.io by Praashoo7 */ 
