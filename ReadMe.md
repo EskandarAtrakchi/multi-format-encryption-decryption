@@ -14,7 +14,7 @@ New-Item -ItemType Directory -Path "project-root/bin"
 New-Item -ItemType Directory -Path "project-root/assets/images"
 New-Item -ItemType Directory -Path "project-root/tests"
 ```
-
+## Tree structure of the project 
 ```
 /project-root
 │
