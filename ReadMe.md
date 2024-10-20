@@ -13,7 +13,7 @@ New-Item -ItemType Directory -Path "project-root/bin"
 New-Item -ItemType Directory -Path "project-root/assets/images"
 New-Item -ItemType Directory -Path "project-root/tests"
 
-
+```
 /project-root
 │
 ├── /bin                   # Scripts or executables (optional)
@@ -41,3 +41,4 @@ New-Item -ItemType Directory -Path "project-root/tests"
 ├── package.json           # (Optional if using npm for package management)
 │
 └── .gitignore             # Git ignore file
+```
