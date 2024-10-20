@@ -5,6 +5,7 @@
 New-Item -ItemType Directory -Name "project-root"
 
 ## Create subdirectories
+```
 New-Item -ItemType Directory -Path "project-root/src/html"
 New-Item -ItemType Directory -Path "project-root/src/css"
 New-Item -ItemType Directory -Path "project-root/src/js"
@@ -12,6 +13,7 @@ New-Item -ItemType Directory -Path "project-root/lib"
 New-Item -ItemType Directory -Path "project-root/bin"
 New-Item -ItemType Directory -Path "project-root/assets/images"
 New-Item -ItemType Directory -Path "project-root/tests"
+```
 
 ```
 /project-root
