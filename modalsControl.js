@@ -17,3 +17,27 @@ window.addEventListener("click", function (event) {
         retrieveModal.style.display = "none";
     }
 });
+
+// Function to display the "file stored" modal with encryption details
+function showStoreModal(fileName, fileHash, iv) {
+    const storeModal = document.getElementById("storeModal");
+    const storeModalText = document.getElementById("storeModalText");
+    storeModalText.innerHTML = `
+        File "${fileName}" stored successfully!<br />
+        <strong>Hash:</strong> ${fileHash}<br />
+        <strong>IV:</strong> ${Array.from(iv).join(', ')}
+    `;
+    storeModal.style.display = "block";
+}
+
+// Function to display the "file retrieved" modal with encryption details
+function showRetrieveModal(fileName, fileHash, iv) {
+    const retrieveModal = document.getElementById("retrieveModal");
+    const retrieveModalText = document.getElementById("retrieveModalText");
+    retrieveModalText.innerHTML = `
+        File "${fileName}" retrieved successfully!<br />
+        <strong>Hash:</strong> ${fileHash}<br />
+        <strong>IV:</strong> ${Array.from(iv).join(', ')}
+    `;
+    retrieveModal.style.display = "block";
+}
