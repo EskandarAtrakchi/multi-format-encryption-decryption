@@ -117,26 +117,6 @@ function showRetrieveModal(fileName, fileHash, iv) {
     retrieveModal.style.display = "block";
 }
 
-// Close modals when the close button is clicked
-document.getElementById("storeClose").addEventListener("click", function () {
-    document.getElementById("storeModal").style.display = "none";
-});
-document.getElementById("retrieveClose").addEventListener("click", function () {
-    document.getElementById("retrieveModal").style.display = "none";
-});
-
-// Close modals if clicked outside of them
-window.addEventListener("click", function (event) {
-    const storeModal = document.getElementById("storeModal");
-    const retrieveModal = document.getElementById("retrieveModal");
-    if (event.target === storeModal) {
-        storeModal.style.display = "none";
-    }
-    if (event.target === retrieveModal) {
-        retrieveModal.style.display = "none";
-    }
-});
-
 // Store file in the cache and localStorage (with encryption and hash for integrity)
 async function storeFileInCache(file) {
     // Check if the file exceeds the maximum size
@@ -233,36 +213,3 @@ async function retrieveFileFromCache(fileName) {
         document.getElementById("output").innerText = `No file found for: ${fileName}`;
     }
 }
-
-// Event Listeners for Storing and Retrieving Data
-document.getElementById("store").addEventListener("click", async () => {
-    const fileInput = document.getElementById("fileInput");
-    const file = fileInput.files[0];
-
-    if (file) {
-        await storeFileInCache(file);
-    }
-});
-
-document.getElementById("retrieve").addEventListener("click", async () => {
-    const fileSelect = document.getElementById("fileSelect");
-    const fileName = fileSelect.value;
-
-    if (fileName) {
-        await retrieveFileFromCache(fileName);
-    }
-});
-
-
-document.getElementById("clearStorage").addEventListener("click", function () {
-    // Clear all files and keys from localStorage
-    localStorage.clear(); // This clears everything from localStorage
-
-    // Clear the dropdown options
-    const fileSelect = document.getElementById("fileSelect");
-    fileSelect.innerHTML = '<option value="" disabled selected>Select a file to retrieve</option>'; // Reset dropdown
-
-    window.location.reload();
-    // Notify the user
-    alert("All stored files and keys have been cleared.");
-});
