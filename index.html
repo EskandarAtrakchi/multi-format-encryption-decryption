@@ -11,17 +11,21 @@
       <div class="modal-content">
         <span id="pinClose" class="close">&times;</span>
         <p>Please enter your PIN:</p>
-        <input type="password" id="pinInput" />
+        <input
+          type="password"
+          id="pinInput"
+          title="Enter your PIN"
+          placeholder="Enter your PIN"
+        />
         <button onclick="checkPIN()">Submit</button>
         <p id="pinError" style="color: red; display: none">
           Incorrect PIN. Please try again.
         </p>
       </div>
     </div>
-    <button onclick="setTheme('light-theme')">Light Theme</button>
-    <button onclick="setTheme('dark-theme')">Dark Theme</button>
+    <button id="themeToggle">Toggle Theme</button>
 
-    <div>
+    <div id="mainContent" style="display: none">
       <div class="main">
         <div class="card">
           <svg
@@ -361,7 +365,9 @@
         // Iterate over localStorage and populate the dropdown with file names
         for (let i = 0; i < localStorage.length; i++) {
           const fileName = localStorage.key(i);
-          updateFileSelect(fileName);
+          if (fileName !== "theme") {
+            updateFileSelect(fileName);
+          }
         }
       });
 
@@ -374,6 +380,5 @@
         fileSelect.appendChild(option);
       }
     </script>
-    <script src="Themes.js"></script>
   </body>
 </html>

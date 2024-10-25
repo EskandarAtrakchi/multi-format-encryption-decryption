@@ -1,72 +1,98 @@
 :root {
-  --background-color: #0f0224;
-  --text-color: #333333;
+  /* Base Colors */
+  --background-color: #f3e5f5; /* Light purple for background */
+  --text-color: #3c1053; /* Deep purple for text */
+
+  /* Input & Form Elements */
   --input-bg-color: #ffffff;
-  --input-text-color: #000000;
-  --btn-bg-color: #000000;
+  --input-text-color: #3c1053;
+  
+  /* Buttons */
+  --btn-bg-color: #6a1b9a; /* Medium purple */
   --btn-text-color: #ffffff;
-  --modal-bg-color: #00000066;
-  --card-bg-color: #d3d3d3;
-  --hover-color: #0056b3;
-  --hover-text-color: #ffffff;
-  --border-color: #cccccc;
-  --close-hover-color: #000000;
+  
+  /* Modal Backgrounds */
+  --modal-bg-color: rgba(60, 16, 83, 0.8); /* Deep purple with opacity */
   --modal-content-bg-color: #ffffff;
-  --modal-content-border-color: #888888;
-  --link-color: #007bff;
-  --instagram-color: #cc39a4;
-  --twitter-color: #03a9f4;
-  --dribble-color: #ffb5d2;
-  --codepen-color: #000000;
-  --discord-color: #8c9eff;
-  --github-color: #000000;
-  --telegram-color: #29b6f6;
+  --modal-content-border-color: #ce93d8; /* Light lavender border for contrast */
+  
+  /* Cards and Borders */
+  --card-bg-color: #e1bee7; /* Soft lavender */
+  --border-color: #ce93d8; /* Light lavender */
+  --hover-color: #8e24aa; /* Vibrant purple for hover */
+  --hover-text-color: #ffffff;
+  --close-hover-color: #6a1b9a; /* Darker purple for close button hover */
+  
+  /* Links */
+  --link-color: #ab47bc; /* Light purple */
+  
+  /* Social Media Colors */
+  --instagram-color: #e1306c;
+  --twitter-color: #1da1f2;
+  --dribble-color: #ea4c89;
+  --codepen-color: #333333;
+  --discord-color: #7289da;
+  --github-color: #181717;
+  --telegram-color: #0088cc;
   --reddit-color: #ff4500;
 }
 
 .light-theme {
-  --background-color: #e0a7f7;
-  --text-color: #2a0831;
+  --background-color: #f3e5f5; /* Light lavender for background */
+  --text-color: #3c1053; /* Darker purple for text */
+  
+  /* Input & Form Elements */
   --input-bg-color: #ffffff;
-  --input-text-color: #000000;
-  --btn-bg-color: #ffffff;
-  --btn-text-color: #000000;
-  --modal-bg-color: #ffffffcc;
-  --card-bg-color: #dddddd;
-  --hover-color: #0056b3;
-  --hover-text-color: #ffffff;
-  --border-color: #dddddd;
-  --close-hover-color: #000000;
+  --input-text-color: #3c1053;
+  
+  /* Button Colors */
+  --btn-bg-color: #ba68c8; /* Medium lavender */
+  --btn-text-color: #ffffff;
+  
+  /* Modal Background */
+  --modal-bg-color: rgba(60, 16, 83, 0.9); /* Dark purple with high opacity */
   --modal-content-bg-color: #ffffff;
-  --modal-content-border-color: #888888;
-  --link-color: #0056b3;
+  --modal-content-border-color: #ab47bc; /* Slightly darker border color */
+  
+  /* Card and Border */
+  --card-bg-color: #f3e5f5;
+  --border-color: #ab47bc;
+  --hover-color: #8e24aa; /* Bright purple */
+  --hover-text-color: #ffffff;
+  --close-hover-color: #6a1b9a;
+  
+  /* Link Color */
+  --link-color: #7b1fa2;
 }
 
 .dark-theme {
-  --background-color: #32174d;
-  --text-color: #ffffff;
-  --input-bg-color: #333333;
-  --input-text-color: #ffffff;
-  --btn-bg-color: #000000;
+  --background-color: #1a001f; /* Very dark purple */
+  --text-color: #d1c4e9; /* Light lavender for high contrast */
+  
+  /* Input & Form Elements */
+  --input-bg-color: #3c1053;
+  --input-text-color: #d1c4e9;
+  
+  /* Button Colors */
+  --btn-bg-color: #7e57c2; /* Medium dark purple */
   --btn-text-color: #ffffff;
-  --modal-bg-color: #00000066;
-  --card-bg-color: #444444;
-  --hover-color: #0056b3;
+  
+  /* Modal Background */
+  --modal-bg-color: rgba(0, 0, 0, 0.7); /* Very dark background for contrast */
+  --modal-content-bg-color: #311b92; /* Deep purple for modal content */
+  --modal-content-border-color: #9575cd; /* Medium purple for border */
+  
+  /* Card and Border */
+  --card-bg-color: #4a148c; /* Dark purple */
+  --border-color: #9575cd; /* Medium purple */
+  --hover-color: #ab47bc; /* Brighter purple for hover */
   --hover-text-color: #ffffff;
-  --border-color: #888888;
-  --close-hover-color: #ffffff;
-  --modal-content-bg-color: #333333;
-  --modal-content-border-color: #888888;
-  --link-color: #0056b3;
-  --instagram-color: #cc39a4;
-  --twitter-color: #03a9f4;
-  --dribble-color: #ffb5d2;
-  --codepen-color: #000000;
-  --discord-color: #8c9eff;
-  --github-color: #000000;
-  --telegram-color: #29b6f6;
-  --reddit-color: #ff4500;
+  --close-hover-color: #d1c4e9; /* Light lavender close hover */
+  
+  /* Link Color */
+  --link-color: #b39ddb;
 }
+
 
 /* General Styles */
 body {
