@@ -1,4 +1,35 @@
 //local storage issue
+const correctPIN = "1234";
+
+// Function to check the entered PIN
+function checkPIN() {
+    const enteredPIN = document.getElementById('pinInput').value;
+    if (enteredPIN === correctPIN) {
+        document.getElementById('pinModal').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';  // Show main content
+    } else {
+        document.getElementById('pinError').style.display = 'block';
+    }
+}
+
+document.getElementById('pinClose').addEventListener('click', () => {
+    document.getElementById('pinModal').style.display = 'none';
+});
+
+window.addEventListener('load', () => {
+    document.getElementById('pinModal').style.display = 'block';
+    document.getElementById('mainContent').style.display = 'none'; // Initially hide main content
+
+    // Apply saved theme on page load
+    const savedTheme = localStorage.getItem('theme') || 'light-theme';
+    setTheme(savedTheme);
+});
+
+function setTheme(themeName) {
+    document.documentElement.className = themeName;
+    localStorage.setItem('theme', themeName);
+}
+
 
 document.getElementById("clearStorage").addEventListener("click", function () {
     // Clear all files and keys from localStorage
