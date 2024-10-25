@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
     <link rel="stylesheet" href="style.css" />
     <title>Secure Caching System</title>
 </head>
@@ -312,6 +313,7 @@
     <script src="cache.js"></script>
     <script src="modalsControl.js"></script>
     <script src="localStorageIssue.js"></script>
+    <script src="formal.js"></script>
     <script>
         // On page load, repopulate fileSelect with stored files
         window.addEventListener('load', () => {
