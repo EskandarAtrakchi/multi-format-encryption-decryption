@@ -92,3 +92,14 @@ function updateFileSelect(fileName) {
     option.textContent = fileName;
     fileSelect.appendChild(option);
 }
+
+function passKey () {
+    let PIN = prompt("Please input your PIN to access the file");
+
+    if (PIN == 1234) {
+        alert("Access granted");
+    } else {
+        alert("Access denied");
+        window.close();
+    }
+}
