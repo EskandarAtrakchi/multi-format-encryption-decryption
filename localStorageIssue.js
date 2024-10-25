@@ -72,9 +72,10 @@ async function storeFileInCache(file) {
     } catch (e) {
         if (e.name === 'QuotaExceededError') {
             alert(`Failed to store the file "${file.name}". The file is too large or localStorage is full.`);
-            console.error('QuotaExceededError: Failed to store file in localStorage.');
+            console.log('QuotaExceededError: Failed to store file in localStorage.');
+            return;
         } else {
-            console.error('Error storing file in localStorage:', e);
+            console.log('Error storing file in localStorage:', e);
         }
     }
 }
