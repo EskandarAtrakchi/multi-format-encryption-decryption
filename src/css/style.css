@@ -33,6 +33,7 @@ input[type="file"], select {
     width: 100%;
     max-width: 400px;
     color: #33ff00;
+    background-color: #000;
 }
 
 /* Output Section */
