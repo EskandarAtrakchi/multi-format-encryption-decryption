@@ -139,6 +139,7 @@ a:hover {
 .btn-53 {
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: button;
+  appearance: button;
   background-color: #000;
   background-image: none;
   color: #fff;
@@ -150,6 +151,7 @@ a:hover {
   line-height: 1.5;
   margin: 0;
   -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  mask-image: radial-gradient(#000, #fff);
   padding: 0;
 }
 
@@ -163,7 +165,6 @@ a:hover {
 
 .btn-53 svg {
   display: block;
-  vertical-align: middle;
 }
 
 .btn-53 [hidden] {
