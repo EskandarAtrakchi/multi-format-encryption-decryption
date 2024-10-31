@@ -26,13 +26,13 @@ label {
 input[type="file"], select {
     padding: 8px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #ff0000;
     font-size: 1rem;
     margin-bottom: 15px;
     display: block;
     width: 100%;
     max-width: 400px;
-    color: #000000;
+    color: #33ff00;
 }
 
 /* Output Section */
