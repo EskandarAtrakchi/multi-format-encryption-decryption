@@ -32,7 +32,7 @@ input[type="file"], select {
     display: block;
     width: 100%;
     max-width: 400px;
-    color: #ffffff;
+    color: #000000;
 }
 
 /* Output Section */
