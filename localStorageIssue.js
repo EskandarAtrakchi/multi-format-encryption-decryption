@@ -37,8 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
-  // Correct PIN for verification
-  const correctPIN = "1234";
+
   let pinVerified = false; // Flag to check if PIN is verified
   
   // Function to check the entered PIN
