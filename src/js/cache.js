@@ -1,5 +1,5 @@
 // Define the maximum file size limit (in bytes), e.g., 5 MB
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 // Hash Table (Map) to store cached data
 const cache = new Map();
