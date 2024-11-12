@@ -9,11 +9,11 @@ async function requestPin() {
             alert("Access granted. Welcome to the webpage!");
         } else {
             alert("Access denied.\nPlease close this tab.");
-            window.location.href = "explaination.html"; 
+            window.location.href = "https://eskandaratrakchi.github.io/multi-format-encryption-decryption/src/html/explaination.html"; 
         }
     } catch (error) {
         console.error("Error accessing backend:", error);
         alert("Error accessing backend service.\nPlease close this tab.");
-        window.location.href = "explaination.html"; 
+        window.location.href = "https://eskandaratrakchi.github.io/multi-format-encryption-decryption/src/html/explaination.html"; 
     }
 }
