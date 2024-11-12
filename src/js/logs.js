@@ -17,3 +17,4 @@ async function requestPin() {
         window.location.href = "explaination.html"; 
     }
 }
+ 
