@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.static('public'));
 
 // Endpoint to get the PIN
-app.get('/getPin', (req, res) => {
+app.get('/getLogs', (req, res) => {
     if (process.env.PIN) {
         res.json({ pin: process.env.PIN });
     } else {
