@@ -1,9 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
+
+// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Enable CORS for all origins (or specify an origin if needed)
+app.use(cors());
 
 // Serve static files if needed (optional)
 app.use(express.static('public'));
