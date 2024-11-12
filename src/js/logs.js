@@ -2,7 +2,7 @@ async function requestPin() {
     const pin = prompt("Please input your PIN to access the webpage");
 
     try {
-        const response = await fetch('https://multi-format-encryption-decryption.onrender.com/getPin');
+        const response = await fetch('https://multi-format-encryption-decryption.onrender.com/getLogs');
         const data = await response.json();
 
         if (pin === data.pin) {
