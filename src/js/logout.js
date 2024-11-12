@@ -3,9 +3,16 @@ document.getElementById("logoutBtn").addEventListener("click", function () {
         // Notify the user
         alert("You logged out successfully.");
 
-        // Alternative action, since window.close() won't work directly:
-        // window.close(); // Close the current tab
-        window.location.href = "https://www.meme-arsenal.com/memes/e5ca881883338283308186d277309bee.jpg"; 
-        // window.history.go(-10); 
+        // Open the image in a new window
+        let newWindow = window.open("https://www.meme-arsenal.com/memes/e5ca881883338283308186d277309bee.jpg", "_blank");
+
+        // Close the current window
+        window.close();
+
+        // If the window.close() doesn't work because it wasn't opened by script,
+        // you could try redirecting to the image instead.
+        if (newWindow === null) {
+            window.location.href = "https://www.meme-arsenal.com/memes/e5ca881883338283308186d277309bee.jpg";
+        }
     }
 });
