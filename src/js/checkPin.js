@@ -8,12 +8,12 @@ async function requestPin() {
         if (pin === data.pin) {
             alert("Access granted. Welcome to the webpage!");
         } else {
-            alert("Access denied.\nClosing the window.");
-            window.location.reload();
+            alert("Access denied.\nPlease close this tab.");
+            window.location.href = "explaination.html"; 
         }
     } catch (error) {
         console.error("Error accessing backend:", error);
-        alert("Error accessing backend service.\nClosing the window.");
-        window.location.reload();
+        alert("Error accessing backend service.\nPlease close this tab.");
+        window.location.href = "explaination.html"; 
     }
 }
