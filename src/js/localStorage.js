@@ -1,16 +1,18 @@
 //local storage issue
 
 document.getElementById("clearStorage").addEventListener("click", function () {
-    // Clear all files and keys from localStorage
-    localStorage.clear(); // This clears everything from localStorage
+    if (confirm("Are you sure you want to clear all stored files and keys?")) {
+        // Clear all files and keys from localStorage
+        localStorage.clear(); // This clears everything from localStorage
 
-    // Clear the dropdown options
-    const fileSelect = document.getElementById("fileSelect");
-    fileSelect.innerHTML = '<option value="" disabled selected>Select a file to retrieve</option>'; // Reset dropdown
+        // Clear the dropdown options
+        const fileSelect = document.getElementById("fileSelect");
+        fileSelect.innerHTML = '<option value="" disabled selected>Select a file to retrieve</option>'; // Reset dropdown
 
-    window.location.reload();
-    // Notify the user
-    alert("All stored files and keys have been cleared.");
+        // window.location.reload();
+        // Notify the user
+        alert("All stored files and keys have been cleared.");
+    }
 });
 
 // Event Listeners for Storing and Retrieving Data
