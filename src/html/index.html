@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css" />
     <script src="../js/checkPin.js" defer></script>
+    
     <title>Secure Caching System</title>
     
 </head>
 
 <body onload="requestPin()" >
     <div>
-        <button class="Btn">
-        
-        <div class="sign"><strong>←</strong></div>
-        
-        <div class="text">Logout</div>
+        <button class="Btn" id="logoutBtn">
+            <div class="sign"><strong>←</strong></div>
+            <div class="text">Logout</div>
         </button>
     </div>
+
     <div class="mainBodyContainer">
         <div>
             <div class="main">
@@ -325,5 +325,6 @@
     <script src="../js/DOM_manipulation.js"></script>
     <script src="../js/localStorage.js"></script>
     <script src="../js/modalsControl.js"></script>
+    <script src="../js/logout.js"></script>
 </body>
 </html>
