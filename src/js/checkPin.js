@@ -6,14 +6,14 @@ async function requestPin() {
         const data = await response.json();
 
         if (pin === data.pin) {
-            alert("Access granted");
+            alert("Access granted. Welcome to the webpage!");
         } else {
-            alert("Access denied");
-            window.location.href = "about:blank"; // Redirect if access is denied
+            alert("Access denied.\nClosing the window.");
+            window.location.reload();
         }
     } catch (error) {
         console.error("Error accessing backend:", error);
-        alert("Error accessing backend service.");
-        window.location.href = "about:blank"; // Redirect if there is an error
+        alert("Error accessing backend service.\nClosing the window.");
+        window.location.reload();
     }
 }
