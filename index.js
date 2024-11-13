@@ -37,8 +37,48 @@ app.use(session({
         httpOnly: true,
         maxAge: 10000 //setting time 
     }
-}))
+}));
 
+// Precomputed hash of the correct PIN (using SHA-256)
+const storedHashedPIN = '82f084acdaefea0ed3254cb48ac75406bdeb5eba249ae22237e00b4dceb2bf1b'; // Replace with your hashed PIN
+const fixedSalt = 'SOME_RANDOM_SALT'; // Fixed salt used for hashing
+
+let attemptCount = 0;
+const maxAttempts = 3;
+const lockoutTime = 30000; // Lockout time in milliseconds (30 seconds)
+
+app.post('/login', async (req,res) => {
+    //checking the login attempts
+    if(attemptCount >= maxAttempts)
+    {
+        return res.status(429).json({success: false, message: 'Too many attempts, please try again later'});
+    }
+
+    const { pin } = req.body;
+
+    try
+    { //open try 
+        const hashedEnteredPIN = await hashPIN(pin + fixedSalt);
+
+        if (hashedEnteredPIN === storedHashedPIN) 
+        {
+            //if the pin is right, set session and send response
+            req.session.isAuthenticated = true;
+            req.session.attemptCount = 0;
+            res.json({success:true, message: 'PIN Verifed. Access granted.'})
+            
+        } else {
+            attemptCount++;
+            res.status(400).json({success:false, message:'Incorrect PIN'})
+        }
+
+    } //close try
+    catch(err)
+    {//open catch
+        console.error('Error during PIN Verification: ',err);
+        res.status(500).json({success:false, message:'server error'});
+    }//close catch
+});
 
 
 //main route page
