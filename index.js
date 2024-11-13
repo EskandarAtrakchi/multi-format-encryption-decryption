@@ -14,6 +14,12 @@ app.use(cors());
 // Serve static files if needed (optional)
 app.use(express.static('public'));
 
+
+app.get('/', (req,res) => {
+    res.render('index');
+})
+
+
 // Endpoint to get the PIN
 app.get('/getLogs', (req, res) => {
     if (process.env.PIN) {
