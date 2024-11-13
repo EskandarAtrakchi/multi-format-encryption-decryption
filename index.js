@@ -35,7 +35,7 @@ app.use(session({
         name:'mySessionCookie',
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        maxAge: 10000 //setting time 
+        maxAge: 30000 //setting time 
     }
 }));
 
@@ -82,8 +82,9 @@ app.post('/login', async (req,res) => {
 
 async function hashPIN(pin) 
 {
-    const msgbuffer = new TextEncoder.encode(pin);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgbuffer);
+    const encoder = new TextEncoder(); // Create an instance of TextEncoder
+    const msgBuffer = encoder.encode(pin); // Use the encode method on the instance
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray
     .map((b) => b.toString(16).padStart(2,'0'))
@@ -121,9 +122,17 @@ app.get('/', (req,res) => {
     });
 })
 
-app.get('/api/session-data', (req,res) => {
-    res.json({views: req.session.views || 0});
-});
+
+app.get('/api/session-status', (req, res) => {
+    if (req.session && req.session.isAuthenticated) {
+      // Session is valid, return a response indicating the user is authenticated
+      res.json({ isAuthenticated: true });
+    } else {
+      // Session expired or not authenticated
+      res.json({ isAuthenticated: false });
+    }
+  });
+  
 
 
 app.get('/logout', (req,res) => {
@@ -139,7 +148,7 @@ app.get('/logout', (req,res) => {
 
 
 // Endpoint to get the PIN
-app.get('/getLogs', (req, res) => {
+app.get('/getLogs', isAuthenticated, (req, res) => {
     if (process.env.PIN) {
         res.json({ pin: process.env.PIN });
     } else {
