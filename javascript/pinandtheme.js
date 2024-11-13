@@ -69,18 +69,22 @@ async function checkPIN() {
     const hashedEnteredPIN = await hashPIN(enteredPIN + fixedSalt); // Use the fixed salt during hashing
     console.log("Hashed Entered PIN:", hashedEnteredPIN); // Log the hashed entered PIN
 
+    
     // Compare the dynamically generated hash with the precomputed hash
     if (hashedEnteredPIN === storedHashedPIN) {
+      
       console.log("PIN verified successfully.");
       document.getElementById("pinModal").style.display = "none"; // Hide modal if PIN is correct
       document.getElementById("mainContent").style.display = "block"; // Show main content
       pinVerified = true; // Set the flag to true
       document.getElementById("pinError").style.display = "none"; // Hide error message if correct
+      
     } else {
       console.log("Incorrect PIN. Attempt count:", attemptCount + 1); // Log incorrect PIN attempt
       attemptCount++; // Increment attempt count on incorrect PIN
       document.getElementById("pinError").style.display = "block"; // Show error message
     }
+
   } catch (error) {
     console.error("Error during PIN hashing:", error); // Catch any hashing errors
   }

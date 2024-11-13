@@ -380,6 +380,16 @@
         option.textContent = fileName;
         fileSelect.appendChild(option);
       }
+
+      fetch('/api/session-data', {
+        credentials:"include"
+      })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('view-count').innerText = `View count: ${data.views}`;
+        })
+        .catch(error => console.error('Error fetching session data:', error));
+
     </script>
   </body>
 </html>
