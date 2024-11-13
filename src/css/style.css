@@ -1,30 +1,40 @@
 :root {
   /* Base Colors */
-  --background-color: #f3e5f5; /* Light purple for background */
-  --text-color: #3c1053; /* Deep purple for text */
+  --background-color: #f3e5f5;
+  /* Light purple for background */
+  --text-color: #3c1053;
+  /* Deep purple for text */
 
   /* Input & Form Elements */
   --input-bg-color: #ffffff;
   --input-text-color: #3c1053;
 
   /* Buttons */
-  --btn-bg-color: #6a1b9a; /* Medium purple */
+  --btn-bg-color: #6a1b9a;
+  /* Medium purple */
   --btn-text-color: #ffffff;
 
   /* Modal Backgrounds */
-  --modal-bg-color: rgba(60, 16, 83, 0.8); /* Deep purple with opacity */
+  --modal-bg-color: rgba(60, 16, 83, 0.8);
+  /* Deep purple with opacity */
   --modal-content-bg-color: #ffffff;
-  --modal-content-border-color: #ce93d8; /* Light lavender border for contrast */
+  --modal-content-border-color: #ce93d8;
+  /* Light lavender border for contrast */
 
   /* Cards and Borders */
-  --card-bg-color: #e1bee7; /* Soft lavender */
-  --border-color: #ce93d8; /* Light lavender */
-  --hover-color: #8e24aa; /* Vibrant purple for hover */
+  --card-bg-color: #e1bee7;
+  /* Soft lavender */
+  --border-color: #ce93d8;
+  /* Light lavender */
+  --hover-color: #8e24aa;
+  /* Vibrant purple for hover */
   --hover-text-color: #ffffff;
-  --close-hover-color: #6a1b9a; /* Darker purple for close button hover */
+  --close-hover-color: #6a1b9a;
+  /* Darker purple for close button hover */
 
   /* Links */
-  --link-color: #ab47bc; /* Light purple */
+  --link-color: #ab47bc;
+  /* Light purple */
 
   /* Social Media Colors */
   --instagram-color: #e1306c;
@@ -38,26 +48,32 @@
 }
 
 .light-theme {
-  --background-color: #f3e5f5; /* Light lavender for background */
-  --text-color: #3c1053; /* Darker purple for text */
+  --background-color: #f3e5f5;
+  /* Light lavender for background */
+  --text-color: #3c1053;
+  /* Darker purple for text */
 
   /* Input & Form Elements */
   --input-bg-color: #ffffff;
   --input-text-color: #3c1053;
 
   /* Button Colors */
-  --btn-bg-color: #ba68c8; /* Medium lavender */
+  --btn-bg-color: #ba68c8;
+  /* Medium lavender */
   --btn-text-color: #ffffff;
 
   /* Modal Background */
-  --modal-bg-color: rgba(60, 16, 83, 0.9); /* Dark purple with high opacity */
+  --modal-bg-color: rgba(60, 16, 83, 0.9);
+  /* Dark purple with high opacity */
   --modal-content-bg-color: #ffffff;
-  --modal-content-border-color: #ab47bc; /* Slightly darker border color */
+  --modal-content-border-color: #ab47bc;
+  /* Slightly darker border color */
 
   /* Card and Border */
   --card-bg-color: #f3e5f5;
   --border-color: #ab47bc;
-  --hover-color: #8e24aa; /* Bright purple */
+  --hover-color: #8e24aa;
+  /* Bright purple */
   --hover-text-color: #ffffff;
   --close-hover-color: #6a1b9a;
 
@@ -66,28 +82,38 @@
 }
 
 .dark-theme {
-  --background-color: #1a001f; /* Very dark purple */
-  --text-color: #d1c4e9; /* Light lavender for high contrast */
+  --background-color: #1a001f;
+  /* Very dark purple */
+  --text-color: #d1c4e9;
+  /* Light lavender for high contrast */
 
   /* Input & Form Elements */
   --input-bg-color: #3c1053;
   --input-text-color: #d1c4e9;
 
   /* Button Colors */
-  --btn-bg-color: #7e57c2; /* Medium dark purple */
+  --btn-bg-color: #7e57c2;
+  /* Medium dark purple */
   --btn-text-color: #ffffff;
 
   /* Modal Background */
-  --modal-bg-color: rgba(0, 0, 0, 0.7); /* Very dark background for contrast */
-  --modal-content-bg-color: #311b92; /* Deep purple for modal content */
-  --modal-content-border-color: #9575cd; /* Medium purple for border */
+  --modal-bg-color: rgba(0, 0, 0, 0.7);
+  /* Very dark background for contrast */
+  --modal-content-bg-color: #311b92;
+  /* Deep purple for modal content */
+  --modal-content-border-color: #9575cd;
+  /* Medium purple for border */
 
   /* Card and Border */
-  --card-bg-color: #4a148c; /* Dark purple */
-  --border-color: #9575cd; /* Medium purple */
-  --hover-color: #ab47bc; /* Brighter purple for hover */
+  --card-bg-color: #4a148c;
+  /* Dark purple */
+  --border-color: #9575cd;
+  /* Medium purple */
+  --hover-color: #ab47bc;
+  /* Brighter purple for hover */
   --hover-text-color: #ffffff;
-  --close-hover-color: #d1c4e9; /* Light lavender close hover */
+  --close-hover-color: #d1c4e9;
+  /* Light lavender close hover */
 
   /* Link Color */
   --link-color: #b39ddb;
@@ -106,6 +132,63 @@ body {
   min-height: 100vh;
 }
 
+/* Container for the buttons */
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+}
+
+/* Style for the logout button */
+#logoutBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--btn-bg-color);
+  color: var(--btn-text-color);
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure the text fits within the button */
+#logoutBtn .text {
+  margin-left: 5px;
+}
+
+
+/* Hover effect for the buttons */
+#logoutBtn:hover,
+#themeToggle:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+}
+/* Container for the main body */
+.mainBodyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Ensure the container takes full width and height without scrolling */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+}
 h1,
 h2 {
   color: var(--text-color);
@@ -189,20 +272,24 @@ a:hover {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  display: none;
+  /* Hidden by default */
   position: fixed;
-  z-index: 1; /* Sit on top */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--modal-bg-color); /* Background with opacity */
+  background-color: var(--modal-bg-color);
+  /* Background with opacity */
 }
 
 /* Modal Content */
 .modal-content {
   background-color: var(--modal-content-bg-color);
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
+  /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid var(--modal-content-border-color);
   width: 80%;
@@ -224,12 +311,6 @@ a:hover {
   color: var(--close-hover-color);
   text-decoration: none;
   cursor: pointer;
-}
-
-/* Button Styles */
-.btn-53 {
-  background-color: var(--btn-bg-color);
-  color: var(--btn-text-color);
 }
 
 /* Main back styles */
@@ -479,6 +560,10 @@ a:hover {
 }
 
 @keyframes backgroundIMG {
+  0% {
+    background-image: none;
+  }
+
   100% {
     background-image: linear-gradient(
       var(--instagram-color),
@@ -498,28 +583,35 @@ a:hover {
   letter-spacing: 0.33em;
   z-index: 3;
 }
+
 .btn-53 {
-  background: linear-gradient(
-    90deg,
-    #03a9f4,
-    #cc39a4,
-    #ffb5d2
-  ); /* Gradient background */
-  color: transparent; /* Hide the text initially */
+  background: linear-gradient(90deg, #03a9f4, #cc39a4, #ffb5d2);
+
+  /* Gradient background */
+  color: transparent;
+  /* Hide the text initially */
   position: relative;
   overflow: hidden;
-  border: none; /* Remove border */
-  border-radius: 999px; /* Full rounded corners */
-  padding: 1.2rem 3rem; /* Adjust padding as needed */
-  font-weight: 900; /* Bold text */
-  text-transform: uppercase; /* Uppercase letters */
+  border: none;
+  /* Remove border */
+  border-radius: 999px;
+  /* Full rounded corners */
+  padding: 1.2rem 3rem;
+  /* Adjust padding as needed */
+  font-weight: 900;
+  /* Bold text */
+  text-transform: uppercase;
+  /* Uppercase letters */
   cursor: pointer;
-  font-family: "Arial", sans-serif; /* Consistent font */
+  font-family: "Arial", sans-serif;
+  /* Consistent font */
 }
 
 .btn-53 .original {
-  background: #fff; /* Background for the original text */
-  color: #000; /* Color for original text */
+  background: #fff;
+  /* Background for the original text */
+  color: #000;
+  /* Color for original text */
   display: grid;
   inset: 0;
   place-content: center;
@@ -528,33 +620,42 @@ a:hover {
 }
 
 .btn-53:hover .original {
-  transform: translateY(100%); /* Move original text down on hover */
+  transform: translateY(100%);
+  /* Move original text down on hover */
 }
 
 .btn-53 .letters {
   display: inline-flex;
   position: relative;
-  z-index: 1; /* Position letters above the original */
+  z-index: 1;
+  /* Position letters above the original */
 }
 
 .btn-53 span {
-  opacity: 0; /* Hide letters initially */
-  transform: translateY(-15px); /* Start position for letters */
+  opacity: 0;
+  /* Hide letters initially */
+  transform: translateY(-15px);
+  /* Start position for letters */
   transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.2s;
-  color: #fff; /* Change text color */
+  color: #fff;
+  /* Change text color */
 }
 
 .btn-53 span:nth-child(2n) {
-  transform: translateY(15px); /* Adjust second child to move down */
+  transform: translateY(15px);
+  /* Adjust second child to move down */
 }
 
 .btn-53:hover span {
-  opacity: 1; /* Show letters on hover */
-  transform: translateY(0); /* Move to original position */
+  opacity: 1;
+  /* Show letters on hover */
+  transform: translateY(0);
+  /* Move to original position */
 }
 
 .btn-53:hover span:nth-child(2) {
-  transition-delay: 0.5s; /* Staggered animations */
+  transition-delay: 0.5s;
+  /* Staggered animations */
 }
 
 .btn-53:hover span:nth-child(3) {
@@ -575,45 +676,66 @@ a:hover {
 
 /* Additional styles for hover effects */
 .btn-53:hover {
-  filter: brightness(0.9); /* Slight darkening effect on hover */
+  filter: brightness(0.9);
+  /* Slight darkening effect on hover */
 }
-/* Base styles for the theme toggle button */
+
 /* Base styles for the theme toggle button */
 #themeToggle {
-  background-color: var(--btn-bg-color); /* Base button color */
-  color: var(--btn-text-color); /* Base text color */
-  border: none; /* No border */
-  padding: 10px 20px; /* Padding around text */
-  text-align: center; /* Center text */
-  text-decoration: none; /* No underline */
-  display: inline-block; /* Display as inline-block */
-  font-size: 16px; /* Font size */
-  margin: 10px 2px; /* Margin around button */
-  cursor: pointer; /* Pointer cursor on hover */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transition for background and text color */
+  background-color: var(--btn-bg-color);
+  /* Base button color */
+  color: var(--btn-text-color);
+  /* Base text color */
+  border: none;
+  /* No border */
+  padding: 10px 20px;
+  /* Padding around text */
+  text-align: center;
+  /* Center text */
+  text-decoration: none;
+  /* No underline */
+  display: inline-block;
+  /* Display as inline-block */
+  font-size: 16px;
+  /* Font size */
+  margin: 10px 2px;
+  /* Margin around button */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  border-radius: 5px;
+  /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Transition for background and text color */
 }
 
 /* Hover effect for the button */
 #themeToggle:hover {
-  background-color: var(--hover-color); /* Change to hover color */
-  color: var(--hover-text-color); /* Change text color on hover */
+  background-color: var(--hover-color);
+  /* Change to hover color */
+  color: var(--hover-text-color);
+  /* Change text color on hover */
 }
 
 /* Optional: Add an icon style if you use one */
 #themeToggle .icon {
-  margin-right: 8px; /* Space between icon and text */
-  font-size: 18px; /* Icon size */
+  margin-right: 8px;
+  /* Space between icon and text */
+  font-size: 18px;
+  /* Icon size */
 }
 
 /* Styles for the light theme */
 .light-theme #themeToggle {
-  background-color: var(--btn-bg-color); /* Original button color for light theme */
-  color: var(--text-color); /* Dark text for light theme */
+  background-color: var(--btn-bg-color);
+  /* Original button color for light theme */
+  color: var(--text-color);
+  /* Dark text for light theme */
 }
 
 /* Styles for the dark theme */
 .dark-theme #themeToggle {
-  background-color: var(--btn-text-color); /* Inverse button color for dark theme */
-  color: var(--btn-bg-color); /* Light text for dark theme */
+  background-color: var(--btn-text-color);
+  /* Inverse button color for dark theme */
+  color: var(--btn-bg-color);
+  /* Light text for dark theme */
 }
