@@ -1,6 +1,4 @@
 pin.js
 .vscode/launch.json
-/node_modules
-gen.js
-package-lock.json
-package.json
+node_modules
+
