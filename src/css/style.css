@@ -1,247 +1,238 @@
+:root {
+  /* Base Colors */
+  --background-color: #f3e5f5; /* Light purple for background */
+  --text-color: #3c1053; /* Deep purple for text */
+
+  /* Input & Form Elements */
+  --input-bg-color: #ffffff;
+  --input-text-color: #3c1053;
+
+  /* Buttons */
+  --btn-bg-color: #6a1b9a; /* Medium purple */
+  --btn-text-color: #ffffff;
+
+  /* Modal Backgrounds */
+  --modal-bg-color: rgba(60, 16, 83, 0.8); /* Deep purple with opacity */
+  --modal-content-bg-color: #ffffff;
+  --modal-content-border-color: #ce93d8; /* Light lavender border for contrast */
+
+  /* Cards and Borders */
+  --card-bg-color: #e1bee7; /* Soft lavender */
+  --border-color: #ce93d8; /* Light lavender */
+  --hover-color: #8e24aa; /* Vibrant purple for hover */
+  --hover-text-color: #ffffff;
+  --close-hover-color: #6a1b9a; /* Darker purple for close button hover */
+
+  /* Links */
+  --link-color: #ab47bc; /* Light purple */
+
+  /* Social Media Colors */
+  --instagram-color: #e1306c;
+  --twitter-color: #1da1f2;
+  --dribble-color: #ea4c89;
+  --codepen-color: #333333;
+  --discord-color: #7289da;
+  --github-color: #181717;
+  --telegram-color: #0088cc;
+  --reddit-color: #ff4500;
+}
+
+.light-theme {
+  --background-color: #f3e5f5; /* Light lavender for background */
+  --text-color: #3c1053; /* Darker purple for text */
+
+  /* Input & Form Elements */
+  --input-bg-color: #ffffff;
+  --input-text-color: #3c1053;
+
+  /* Button Colors */
+  --btn-bg-color: #ba68c8; /* Medium lavender */
+  --btn-text-color: #ffffff;
+
+  /* Modal Background */
+  --modal-bg-color: rgba(60, 16, 83, 0.9); /* Dark purple with high opacity */
+  --modal-content-bg-color: #ffffff;
+  --modal-content-border-color: #ab47bc; /* Slightly darker border color */
+
+  /* Card and Border */
+  --card-bg-color: #f3e5f5;
+  --border-color: #ab47bc;
+  --hover-color: #8e24aa; /* Bright purple */
+  --hover-text-color: #ffffff;
+  --close-hover-color: #6a1b9a;
+
+  /* Link Color */
+  --link-color: #7b1fa2;
+}
+
+.dark-theme {
+  --background-color: #1a001f; /* Very dark purple */
+  --text-color: #d1c4e9; /* Light lavender for high contrast */
+
+  /* Input & Form Elements */
+  --input-bg-color: #3c1053;
+  --input-text-color: #d1c4e9;
+
+  /* Button Colors */
+  --btn-bg-color: #7e57c2; /* Medium dark purple */
+  --btn-text-color: #ffffff;
+
+  /* Modal Background */
+  --modal-bg-color: rgba(0, 0, 0, 0.7); /* Very dark background for contrast */
+  --modal-content-bg-color: #311b92; /* Deep purple for modal content */
+  --modal-content-border-color: #9575cd; /* Medium purple for border */
+
+  /* Card and Border */
+  --card-bg-color: #4a148c; /* Dark purple */
+  --border-color: #9575cd; /* Medium purple */
+  --hover-color: #ab47bc; /* Brighter purple for hover */
+  --hover-text-color: #ffffff;
+  --close-hover-color: #d1c4e9; /* Light lavender close hover */
+
+  /* Link Color */
+  --link-color: #b39ddb;
+}
+
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #0f0224;
-    color: #333;
+  font-family: "Arial", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.mainBodyContainer {
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
-    
-
-h1, h2 {
-    color: #fff;
-    margin-bottom: 20px;
+h1,
+h2 {
+  color: var(--text-color);
+  margin-bottom: 20px;
 }
 
 /* Form Section */
 label {
-    font-size: 1rem;
-    margin-right: 10px;
-    color:#fff;
+  font-size: 1rem;
+  margin-right: 10px;
+  color: var(--text-color);
 }
 
-input[type="file"], select {
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ff0000;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    color: #33ff00;
-    background-color: #000;
+input[type="file"],
+select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  margin-bottom: 15px;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
 }
 
 /* Output Section */
 #output {
-    background-color: #e9ecef;
-    padding: 15px;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-    text-align: center;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--input-bg-color);
+  padding: 15px;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
 
 iframe {
-    border: none;
-    width: 100%;
-    height: 600px;
+  border: none;
+  width: 100%;
+  height: 600px;
 }
 
 a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-    margin-top: 10px;
+  text-decoration: none;
+  color: var(--link-color);
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 a:hover {
-    color: #0056b3;
+  color: var(--hover-color);
 }
 
 /* Center Content */
 .container {
-    max-width: 800px;
-    width: 100%;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--input-bg-color);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    button, input[type="file"], select {
-        width: 100%;
-    }
+  button,
+  input[type="file"],
+  select {
+    width: 100%;
+  }
 }
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-bg-color); /* Background with opacity */
 }
 
 /* Modal Content */
 .modal-content {
-    background-color: #fff;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
-    text-align: center;
+  background-color: var(--modal-content-bg-color);
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid var(--modal-content-border-color);
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 /* Close button */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.close:hover, .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* From Uiverse.io by doniaskima */ 
-.btn-53,
-.btn-53 *,
-.btn-53 :after,
-.btn-53 :before,
-.btn-53:after,
-.btn-53:before {
-  border: 0 solid;
-  box-sizing: border-box;
-}
-
-.btn-53 {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: button;
-  appearance: button;
-  background-color: #000;
-  background-image: none;
-  color: #fff;
+.close:hover,
+.close:focus {
+  color: var(--close-hover-color);
+  text-decoration: none;
   cursor: pointer;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-size: 100%;
-  line-height: 1.5;
-  margin: 0;
-  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
-  mask-image: radial-gradient(#000, #fff);
-  padding: 0;
 }
 
-.btn-53:disabled {
-  cursor: default;
-}
-
-.btn-53:-moz-focusring {
-  outline: auto;
-}
-
-.btn-53 svg {
-  display: block;
-}
-
-.btn-53 [hidden] {
-  display: none;
-}
-
+/* Button Styles */
 .btn-53 {
-  border: 1px solid;
-  border-radius: 999px;
-  box-sizing: border-box;
-  display: block;
-  font-weight: 900;
-  overflow: hidden;
-  padding: 1.2rem 3rem;
-  position: relative;
-  text-transform: uppercase;
+  background-color: var(--btn-bg-color);
+  color: var(--btn-text-color);
 }
 
-.btn-53 .original {
-  background: #fff;
-  color: #000;
-  display: grid;
-  inset: 0;
-  place-content: center;
-  position: absolute;
-  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
-}
-
-.btn-53:hover .original {
-  transform: translateY(100%);
-}
-
-.btn-53 .letters {
-  display: inline-flex;
-}
-
-.btn-53 span {
-  opacity: 0;
-  transform: translateY(-15px);
-  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.2s;
-}
-
-.btn-53 span:nth-child(2n) {
-  transform: translateY(15px);
-}
-
-.btn-53:hover span {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.btn-53:hover span:nth-child(2) {
-  transition-delay: 0.5s;
-}
-
-.btn-53:hover span:nth-child(3) {
-  transition-delay: 0.82s;
-}
-
-.btn-53:hover span:nth-child(4) {
-  transition-delay: 0.73s;
-}
-
-.btn-53:hover span:nth-child(5) {
-  transition-delay: 0.64s;
-}
-
-.btn-53:hover span:nth-child(6) {
-  transition-delay: 1.0s;
-}
-
-/* From Uiverse.io by Praashoo7 */ 
+/* Main back styles */
 .main_back {
   position: absolute;
   border-radius: 10px;
@@ -253,6 +244,7 @@ a:hover {
   box-shadow: inset 0px 0px 180px 5px #ffffff;
 }
 
+/* Main and card styles */
 .main {
   display: flex;
   flex-wrap: wrap;
@@ -269,19 +261,19 @@ a:hover {
   width: 60px;
   height: 60px;
   border-top-left-radius: 10px;
-  background: lightgrey;
+  background: var(--card-bg-color);
   transition: 0.4s ease-in-out, 0.2s background-color ease-in-out,
     0.2s background-image ease-in-out;
-  background: rgba(255, 255, 255, 0.596);
-  backdrop-filter: blur(5px);
   border: 1px solid transparent;
   -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 }
 
+/* Card styles for specific classes */
 .card .instagram {
   opacity: 0;
   transition: 0.2s ease-in-out;
-  fill: #cc39a4;
+  fill: var(--instagram-color);
 }
 
 .card:nth-child(2) {
@@ -291,7 +283,7 @@ a:hover {
 .card:nth-child(2) .twitter {
   opacity: 0;
   transition: 0.2s ease-in-out;
-  fill: #03a9f4;
+  fill: var(--twitter-color);
 }
 
 .card:nth-child(3) {
@@ -302,7 +294,7 @@ a:hover {
 .card:nth-child(3) .dribble {
   opacity: 0;
   transition: 0.2s ease-in-out;
-  fill: #ffb5d2;
+  fill: var(--dribble-color);
 }
 
 .card:nth-child(4) {
@@ -312,7 +304,7 @@ a:hover {
 .card:nth-child(4) .codepen {
   opacity: 0;
   transition: 0.2s ease-in-out;
-  fill: black;
+  fill: var(--codepen-color);
 }
 
 .card:nth-child(5) {
@@ -334,7 +326,7 @@ a:hover {
 .card:nth-child(6) .discord {
   opacity: 0;
   transition: 0.2s ease-in-out;
-  fill: #8c9eff;
+  fill: var(--discord-color);
 }
 
 .card:nth-child(7) {
@@ -345,7 +337,7 @@ a:hover {
 .card:nth-child(7) .github {
   opacity: 0;
   transition: 0.2s ease-in-out;
-  fill: black;
+  fill: var(--github-color);
 }
 
 .card:nth-child(8) {
@@ -355,7 +347,7 @@ a:hover {
 .card:nth-child(8) .telegram {
   opacity: 0;
   transition: 0.2s ease-in-out;
-  fill: #29b6f6;
+  fill: var(--telegram-color);
 }
 
 .card:nth-child(9) {
@@ -363,11 +355,91 @@ a:hover {
   border-top-left-radius: 0px;
 }
 
+.card:nth-child(9) .reddit > g path {
+  fill: var(--reddit-color);
+}
+
 .card:nth-child(9) .reddit {
   opacity: 0;
   transition: 0.2s ease-in-out;
+  fill: var(--reddit-color);
 }
 
+/* Hover Styles */
+.card:nth-child(1):hover {
+  background-color: var(--instagram-color);
+}
+
+.card:nth-child(1):hover .instagram {
+  fill: var(--text-color);
+}
+
+.card:nth-child(2):hover {
+  background-color: var(--twitter-color);
+}
+
+.card:nth-child(2):hover .twitter {
+  fill: var(--text-color);
+}
+
+.card:nth-child(3):hover {
+  background-color: var(--dribble-color);
+}
+
+.card:nth-child(3):hover .dribble {
+  fill: var(--text-color);
+}
+
+.card:nth-child(4):hover {
+  background-color: var(--codepen-color);
+}
+
+.card:nth-child(4):hover .codepen {
+  fill: var(--text-color);
+}
+
+.card:nth-child(5):hover {
+  animation: backgroundIMG 0.1s;
+  animation-fill-mode: forwards;
+}
+
+.card:nth-child(6):hover {
+  background-color: var(--discord-color);
+}
+
+.card:nth-child(6):hover .discord {
+  fill: var(--text-color);
+}
+
+.card:nth-child(7):hover {
+  background-color: var(--github-color);
+}
+
+.card:nth-child(7):hover .github {
+  fill: var(--text-color);
+}
+
+.card:nth-child(8):hover {
+  background-color: var(--telegram-color);
+}
+
+.card:nth-child(8):hover .telegram > path:nth-of-type(1) {
+  fill: var(--text-color);
+}
+
+.card:nth-child(8):hover .telegram > path:nth-of-type(2) {
+  fill: var(--telegram-color);
+}
+
+.card:nth-child(8):hover .telegram > path:nth-of-type(3) {
+  fill: var(--telegram-color);
+}
+
+.card:nth-child(9):hover .reddit > g path {
+  fill: var(--text-color);
+}
+
+/* Other Hover Styles */
 .main:hover {
   width: 14em;
   cursor: pointer;
@@ -394,225 +466,154 @@ a:hover {
   z-index: -3;
 }
 
-.main:hover .instagram {
-  opacity: 1;
-}
-
-.main:hover .twitter {
-  opacity: 1;
-}
-
-.main:hover .dribble {
-  opacity: 1;
-}
-
-.main:hover .codepen {
-  opacity: 1;
-}
-
-.main:hover .uiverse {
-  opacity: 1;
-}
-
-.main:hover .discord {
-  opacity: 1;
-}
-
-.main:hover .github {
-  opacity: 1;
-}
-
-.main:hover .telegram {
-  opacity: 1;
-}
-
+.main:hover .instagram,
+.main:hover .twitter,
+.main:hover .dribble,
+.main:hover .codepen,
+.main:hover .uiverse,
+.main:hover .discord,
+.main:hover .github,
+.main:hover .telegram,
 .main:hover .reddit {
   opacity: 1;
 }
 
-.card:nth-child(1):hover {
-  background-color: #cc39a4;
-}
-
-.card:nth-child(1):hover .instagram {
-  fill: white;
-}
-
-.card:nth-child(2):hover {
-  background-color: #03a9f4;
-}
-
-.card:nth-child(2):hover .twitter {
-  fill: white;
-}
-
-.card:nth-child(3):hover {
-  background-color: #ffb5d2;
-}
-
-.card:nth-child(3):hover .dribble {
-  fill: white;
-}
-
-.card:nth-child(4):hover {
-  background-color: #1e1f26;
-}
-
-.card:nth-child(4):hover .codepen {
-  fill: white;
-}
-
-.card:nth-child(5):hover {
-  animation: backgroundIMG 0.1s;
-  animation-fill-mode: forwards;
-}
-
-.card:nth-child(5):hover .uiverse #paint0_linear_501_142 stop {
-  stop-color: white;
-}
-
-.card:nth-child(5):hover .uiverse #paint1_linear_501_142 stop {
-  stop-color: white;
-}
-
-.card:nth-child(5):hover .uiverse #paint2_linear_501_142 stop {
-  stop-color: white;
-}
-
 @keyframes backgroundIMG {
   100% {
-    background-image: linear-gradient(#bf66ff, #6248ff, #00ddeb);
+    background-image: linear-gradient(
+      var(--instagram-color),
+      var(--twitter-color),
+      var(--telegram-color)
+    );
   }
-}
-
-.card:nth-child(6):hover {
-  background-color: #8c9eff;
-}
-
-.card:nth-child(6):hover .discord {
-  fill: white;
-}
-
-.card:nth-child(7):hover {
-  background-color: black;
-}
-
-.card:nth-child(7):hover .github {
-  fill: white;
-}
-
-.card:nth-child(8):hover {
-  background-color: #29b6f6;
-}
-
-.card:nth-child(8):hover .telegram > path:nth-of-type(1) {
-  fill: white;
-}
-
-.card:nth-child(8):hover .telegram > path:nth-of-type(2) {
-  fill: #29b6f6;
-}
-
-.card:nth-child(8):hover .telegram > path:nth-of-type(3) {
-  fill: #29b6f6;
-}
-
-.card:nth-child(9):hover {
-  background-color: rgb(255, 69, 0);
-}
-
-.card:nth-child(9) .reddit > g circle {
-  fill: rgb(255, 69, 0);
-}
-
-.card:nth-child(9) .reddit > g path {
-  fill: white;
 }
 
 .text {
   position: absolute;
   font-size: 0.7em;
   transition: 0.4s ease-in-out;
-  color: black;
+  color: var(--text-color);
   text-align: center;
   font-weight: bold;
   letter-spacing: 0.33em;
   z-index: 3;
 }
-
-/*logout BTN stylings starts here*/
-
-/* From Uiverse.io by vinodjangid07 */ 
-.Btn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
+.btn-53 {
+  background: linear-gradient(
+    90deg,
+    #03a9f4,
+    #cc39a4,
+    #ffb5d2
+  ); /* Gradient background */
+  color: transparent; /* Hide the text initially */
   position: relative;
   overflow: hidden;
-  transition-duration: .3s;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: rgb(255, 65, 65);
+  border: none; /* Remove border */
+  border-radius: 999px; /* Full rounded corners */
+  padding: 1.2rem 3rem; /* Adjust padding as needed */
+  font-weight: 900; /* Bold text */
+  text-transform: uppercase; /* Uppercase letters */
+  cursor: pointer;
+  font-family: "Arial", sans-serif; /* Consistent font */
 }
 
-/* plus sign */
-.sign {
-  width: 100%;
-  transition-duration: .3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sign svg {
-  width: 17px;
-}
-
-.sign svg path {
-  fill: white;
-}
-/* text */
-.text {
+.btn-53 .original {
+  background: #fff; /* Background for the original text */
+  color: #000; /* Color for original text */
+  display: grid;
+  inset: 0;
+  place-content: center;
   position: absolute;
-  right: 0%;
-  width: 0%;
-  opacity: 0;
-  color: white;
-  font-size: 1.2em;
-  font-weight: 600;
-  transition-duration: .3s;
-}
-/* hover effect on button width */
-.Btn:hover {
-  width: 125px;
-  border-radius: 40px;
-  transition-duration: .3s;
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
-.Btn:hover .sign {
-  width: 30%;
-  transition-duration: .3s;
-  padding-left: 20px;
+.btn-53:hover .original {
+  transform: translateY(100%); /* Move original text down on hover */
 }
-/* hover effect button's text */
-.Btn:hover .text {
-  opacity: 1;
-  width: 70%;
-  transition-duration: .3s;
-  padding-right: 10px;
+
+.btn-53 .letters {
+  display: inline-flex;
+  position: relative;
+  z-index: 1; /* Position letters above the original */
 }
-/* button click effect*/
-.Btn:active {
-  transform: translate(2px ,2px);
+
+.btn-53 span {
+  opacity: 0; /* Hide letters initially */
+  transform: translateY(-15px); /* Start position for letters */
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.2s;
+  color: #fff; /* Change text color */
 }
-.sign strong {
-    font-size: 30px; /* Increase the arrow size */
-    transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+
+.btn-53 span:nth-child(2n) {
+  transform: translateY(15px); /* Adjust second child to move down */
 }
-.sign strong:hover {
-    opacity: 0.0001; /* Disappear when hovered */
+
+.btn-53:hover span {
+  opacity: 1; /* Show letters on hover */
+  transform: translateY(0); /* Move to original position */
+}
+
+.btn-53:hover span:nth-child(2) {
+  transition-delay: 0.5s; /* Staggered animations */
+}
+
+.btn-53:hover span:nth-child(3) {
+  transition-delay: 0.82s;
+}
+
+.btn-53:hover span:nth-child(4) {
+  transition-delay: 0.73s;
+}
+
+.btn-53:hover span:nth-child(5) {
+  transition-delay: 0.64s;
+}
+
+.btn-53:hover span:nth-child(6) {
+  transition-delay: 1s;
+}
+
+/* Additional styles for hover effects */
+.btn-53:hover {
+  filter: brightness(0.9); /* Slight darkening effect on hover */
+}
+/* Base styles for the theme toggle button */
+/* Base styles for the theme toggle button */
+#themeToggle {
+  background-color: var(--btn-bg-color); /* Base button color */
+  color: var(--btn-text-color); /* Base text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding around text */
+  text-align: center; /* Center text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Display as inline-block */
+  font-size: 16px; /* Font size */
+  margin: 10px 2px; /* Margin around button */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transition for background and text color */
+}
+
+/* Hover effect for the button */
+#themeToggle:hover {
+  background-color: var(--hover-color); /* Change to hover color */
+  color: var(--hover-text-color); /* Change text color on hover */
+}
+
+/* Optional: Add an icon style if you use one */
+#themeToggle .icon {
+  margin-right: 8px; /* Space between icon and text */
+  font-size: 18px; /* Icon size */
+}
+
+/* Styles for the light theme */
+.light-theme #themeToggle {
+  background-color: var(--btn-bg-color); /* Original button color for light theme */
+  color: var(--text-color); /* Dark text for light theme */
+}
+
+/* Styles for the dark theme */
+.dark-theme #themeToggle {
+  background-color: var(--btn-text-color); /* Inverse button color for dark theme */
+  color: var(--btn-bg-color); /* Light text for dark theme */
 }
