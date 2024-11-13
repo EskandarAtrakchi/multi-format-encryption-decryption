@@ -80,6 +80,24 @@ app.post('/login', async (req,res) => {
     }//close catch
 });
 
+async function hashPIN(pin) 
+{
+    const msgbuffer = new TextEncoder.encode(pin);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgbuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray
+    .map((b) => b.toString(16).padStart(2,'0'))
+    .join('');
+}
+
+function isAuthenticated(req,res,next){
+    if(req.session.isAuthenticated)
+    {
+        return next();
+    }
+    return res.status(401).json({success:false, message:'You need to log in '})
+}
+
 
 //main route page
 app.get('/', (req,res) => {
