@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
+const bodyParser = require('body-parser');
+const crypto= require('crypto');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -20,12 +22,17 @@ app.use(express.static('css'));
 app.use('/javascript', express.static(path.join(__dirname, "javascript")));
 app.use(express.static('javascript'));
 
+
+//middleware setup!
+app.use(bodyParser.json());
+
 //creating a session timeout cookie, this goes inline with prevent unauthorized users on a shared device
 app.use(session({
     secret: 'BobisSecret',
     resave: false,
     saveUninitialized: false,
     cookie: {
+        name:'mySessionCookie',
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
         maxAge: 10000 //setting time 
@@ -60,6 +67,17 @@ app.get('/api/session-data', (req,res) => {
     res.json({views: req.session.views || 0});
 });
 
+
+app.get('/logout', (req,res) => {
+    req.session.destroy((err) => {
+        if(err)
+        {
+            return res.status(500).send('Failed to destory the session');
+        }
+        res.clearCookie('connect.sid');
+        res.redirect('/');
+    });
+});
 
 
 // Endpoint to get the PIN
