@@ -131,7 +131,7 @@ app.post('/logout', (req,res) => {
             return res.status(500).send('Failed to destory the session');
         }
         res.clearCookie('connect.sid');
-        res.redirect('/');
+       
     });
 });
 
