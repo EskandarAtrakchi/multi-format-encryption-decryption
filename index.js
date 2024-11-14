@@ -1,6 +1,10 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const path = require('path');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const crypto= require('crypto');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -14,8 +18,97 @@ app.use(cors());
 // Serve static files if needed
 app.use(express.static('public'));
 
+// // Endpoint to get the PIN
+// app.get('/getLogs', (req, res) => {
+//     if (process.env.PIN) {
+//         res.json({ pin: process.env.PIN });
+//     } else {
+//         res.status(500).json({ error: 'PIN not set in .env file' });
+//     }
+// });
+
+
+// -----------------------
+
+//creating a session timeout cookie, this goes inline with prevent unauthorized users on a shared device
+app.use(session({
+    secret: 'BobisSecret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        name:'mySessionCookie',
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 30000 //setting time 
+    }
+}));
+
+app.post('/login', async (req,res) => {
+    //checking the login attempts
+    if(attemptCount >= maxAttempts)
+    {
+        return res.status(429).json({success: false, message: 'Too many attempts, please try again later'});
+    }
+
+    const { pin } = req.body;
+
+    try
+    { //open try 
+        const hashedEnteredPIN = await hashPIN(pin + fixedSalt);
+
+        if (hashedEnteredPIN === storedHashedPIN) 
+        {
+            //if the pin is right, set session and send response
+            req.session.isAuthenticated = true;
+            req.session.attemptCount = 0;
+            res.json({success:true, message: 'PIN Verifed. Access granted.'})
+            
+        } else {
+            attemptCount++;
+            res.status(400).json({success:false, message:'Incorrect PIN'})
+        }
+
+    } //close try
+    catch(err)
+    {//open catch
+        console.error('Error during PIN Verification: ',err);
+        res.status(500).json({success:false, message:'server error'});
+    }//close catch
+});
+
+//   
+function isAuthenticated(req,res,next){
+    if(req.session.isAuthenticated)
+    {
+        return next();
+    }
+    return res.status(401).json({success:false, message:'You need to log in '})
+}
+
+app.get('/api/session-status', (req, res) => {
+    if (req.session && req.session.isAuthenticated) {
+      // Session is valid, return a response indicating the user is authenticated
+      res.json({ isAuthenticated: true });
+    } else {
+      // Session expired or not authenticated
+      res.json({ isAuthenticated: false });
+    }
+  });
+
+
+  app.post('/logout', (req,res) => {
+    req.session.destroy((err) => {
+        if(err)
+        {
+            return res.status(500).send('Failed to destory the session');
+        }
+        res.clearCookie('connect.sid');
+        res.redirect('/');
+    });
+});
+
 // Endpoint to get the PIN
-app.get('/getLogs', (req, res) => {
+app.get('/getLogs', isAuthenticated, (req, res) => {
     if (process.env.PIN) {
         res.json({ pin: process.env.PIN });
     } else {
@@ -23,6 +116,7 @@ app.get('/getLogs', (req, res) => {
     }
 });
 
+// -----------------------
 // Start the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
