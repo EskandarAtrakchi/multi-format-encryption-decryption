@@ -8,7 +8,7 @@ async function requestPin() {
         // Check if the token exists
         if (!token) {
             alert("You need to log in first.");
-            window.location.href = "/login";  // Redirect to login page if no token
+            window.location.href = "/getLogs";  // Redirect to getLogs page if no token
             return;
         }
 
@@ -34,7 +34,7 @@ async function requestPin() {
             // Handle authentication failure or other server issues
             if (data.message === 'Unauthorized access: No token provided' || data.message === 'Forbidden: Invalid token') {
                 alert("Invalid or expired token. Please log in again.");
-                window.location.href = "/login";  // Redirect to login page if token is invalid or expired
+                window.location.href = "/getLogs";  // Redirect to getLogs page if token is invalid or expired
             } else {
                 console.error("Error accessing backend:", data.message || 'Unknown error');
                 alert("Error accessing backend service.\nPlease close this tab.");
