@@ -38,7 +38,7 @@ app.use(session({
 }));
 
 // Precomputed hash of the correct PIN (using SHA-256)
-const storedHashedPIN = '82f084acdaefea0ed3254cb48ac75406bdeb5eba249ae22237e00b4dceb2bf1b'; // Replace with your hashed PIN
+const storedHashedPIN = '82f084acdaefea0ed3254cb48ac75406bdeb5eba249ae22237e00b4dceb2bf1b';
 const fixedSalt = 'SOME_RANDOM_SALT'; // Fixed salt used for hashing
 
 let attemptCount = 0;
@@ -97,28 +97,21 @@ function isAuthenticated(req,res,next){
     return res.status(401).json({success:false, message:'You need to log in '})
 }
 
-
-//main route page
-app.get('/', (req,res) => {
-    
-    if(req.session.views)
-    {
+//changes made in this section
+// Main route page
+app.get('/', (req, res) => {
+    if (req.session.views) {
         req.session.views++;
     } else {
-        req.session.views =1;
+        req.session.views = 1;
     }
 
-    res.sendFile(path.join(__dirname, 'views', 'index.html'), (err) => {
-        if(err)
-        {
-            console.log("Error sending file: ",err);
-            res.sendStatus(500);
-        } else {
-            console.log('Views: ${req.session.views}');
-            console.log(`Session Expires in: ${(req.session.cookie.maxAge/1000).toFixed(1)}`)
-        }
-    });
-})
+    console.log(`Views: ${req.session.views}`);
+    console.log(`Session Expires in: ${(req.session.cookie.maxAge / 1000).toFixed(1)}`);
+
+    // Redirect to the external link
+    res.redirect('https://eskandaratrakchi.github.io/multi-format-encryption-decryption/');
+});
 
 
 app.get('/api/session-status', (req, res) => {
