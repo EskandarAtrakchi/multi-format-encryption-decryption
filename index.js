@@ -26,6 +26,17 @@ app.use(session({
     }
 }));
 
+app.post('/logout', (req,res) => {
+    req.session.destroy((err) => {
+        if(err)
+        {
+            return res.status(500).send('Failed to destory the session');
+        }
+        res.clearCookie('connect.sid');
+       
+    });
+});
+
 
 // Endpoint to get the PIN
 app.get('/getLogs', (req, res) => {
