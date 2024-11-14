@@ -14,6 +14,19 @@ app.use(cors());
 // Serve static files if needed (optional)
 app.use(express.static('public'));
 
+app.use(session({
+    secret: 'BobisSecret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        name:'mySessionCookie',
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 30000 //setting time 
+    }
+}));
+
+
 // Endpoint to get the PIN
 app.get('/getLogs', (req, res) => {
     if (process.env.PIN) {
