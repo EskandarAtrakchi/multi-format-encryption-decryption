@@ -45,37 +45,47 @@ let attemptCount = 0;
 const maxAttempts = 3;
 const lockoutTime = 30000; // Lockout time in milliseconds (30 seconds)
 
-app.post('/login', async (req,res) => {
-    //checking the login attempts
-    if(attemptCount >= maxAttempts)
-    {
-        return res.status(429).json({success: false, message: 'Too many attempts, please try again later'});
+function getPINFromEnv() {
+    if (process.env.PIN) {
+        return process.env.PIN;
+    } else {
+        console.error('PIN not set in .env file');
+        return null;
+    }
+}
+
+
+
+app.post('/login', async (req, res) => {
+    // Checking the login attempts
+    if (req.session.attemptCount >= maxAttempts) {
+        return res.status(429).json({ success: false, message: 'Too many attempts, please try again later' });
     }
 
     const { pin } = req.body;
+    const correctPIN = getPINFromEnv();
 
-    try
-    { //open try 
+    if (!correctPIN) {
+        return res.status(500).json({ success: false, message: 'Server configuration error' });
+    }
+
+    try {
         const hashedEnteredPIN = await hashPIN(pin + fixedSalt);
+        const hashedCorrectPIN = await hashPIN(correctPIN + fixedSalt);
 
-        if (hashedEnteredPIN === storedHashedPIN) 
-        {
-            //if the pin is right, set session and send response
+        if (hashedEnteredPIN === hashedCorrectPIN) {
+            // If the PIN is right, set session and send response
             req.session.isAuthenticated = true;
             req.session.attemptCount = 0;
-            res.json({success:true, message: 'PIN Verifed. Access granted.'})
-            
+            res.json({ success: true, message: 'PIN Verified. Access granted.' });
         } else {
-            attemptCount++;
-            res.status(400).json({success:false, message:'Incorrect PIN'})
+            req.session.attemptCount = (req.session.attemptCount || 0) + 1;
+            res.status(400).json({ success: false, message: 'Incorrect PIN' });
         }
-
-    } //close try
-    catch(err)
-    {//open catch
-        console.error('Error during PIN Verification: ',err);
-        res.status(500).json({success:false, message:'server error'});
-    }//close catch
+    } catch (err) {
+        console.error('Error during PIN Verification: ', err);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 });
 
 async function hashPIN(pin) 
@@ -128,8 +138,9 @@ app.post('/logout', (req,res) => {
 
 // Endpoint to get the PIN
 app.get('/getLogs', isAuthenticated, (req, res) => {
-    if (process.env.PIN) {
-        res.json({ pin: process.env.PIN });
+    const pin = getPINFromEnv();
+    if (pin) {
+        res.json({ pin: pin });
     } else {
         res.status(500).json({ error: 'PIN not set in .env file' });
     }
