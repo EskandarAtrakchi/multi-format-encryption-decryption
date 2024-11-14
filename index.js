@@ -1,114 +1,27 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const path = require('path');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const crypto= require('crypto');
-
-// Load environment variables from .env file
-dotenv.config();
-
+const jwt = require('jsonwebtoken');
 const app = express();
-const port = process.env.PORT || 3000;
 
-// Enable CORS for all origins (or specify an origin if needed)
-app.use(cors());
+// Authentication middleware to verify the token
+function authenticateToken(req, res, next) {
+    const token = req.headers['authorization']?.split(' ')[1];  // Get token from Authorization header
 
-// Serve static files if needed
-app.use(express.static('public'));
-
-// // Endpoint to get the PIN
-// app.get('/getLogs', (req, res) => {
-//     if (process.env.PIN) {
-//         res.json({ pin: process.env.PIN });
-//     } else {
-//         res.status(500).json({ error: 'PIN not set in .env file' });
-//     }
-// });
-
-
-// -----------------------
-
-//creating a session timeout cookie, this goes inline with prevent unauthorized users on a shared device
-app.use(session({
-    secret: 'BobisSecret',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        name:'mySessionCookie',
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
-        maxAge: 30000 //setting time 
-    }
-}));
-
-app.post('/login', async (req,res) => {
-    //checking the login attempts
-    if(attemptCount >= maxAttempts)
-    {
-        return res.status(429).json({success: false, message: 'Too many attempts, please try again later'});
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized access: No token provided' });
     }
 
-    const { pin } = req.body;
-
-    try
-    { //open try 
-        const hashedEnteredPIN = await hashPIN(pin + fixedSalt);
-
-        if (hashedEnteredPIN === storedHashedPIN) 
-        {
-            //if the pin is right, set session and send response
-            req.session.isAuthenticated = true;
-            req.session.attemptCount = 0;
-            res.json({success:true, message: 'PIN Verifed. Access granted.'})
-            
-        } else {
-            attemptCount++;
-            res.status(400).json({success:false, message:'Incorrect PIN'})
+    // Verify the token
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: 'Forbidden: Invalid token' });
         }
-
-    } //close try
-    catch(err)
-    {//open catch
-        console.error('Error during PIN Verification: ',err);
-        res.status(500).json({success:false, message:'server error'});
-    }//close catch
-});
-
-//   
-function isAuthenticated(req,res,next){
-    if(req.session.isAuthenticated)
-    {
-        return next();
-    }
-    return res.status(401).json({success:false, message:'You need to log in '})
+        req.user = user;  // Attach the user info to the request object
+        next();  // Proceed to the next middleware or route handler
+    });
 }
 
-app.get('/api/session-status', (req, res) => {
-    if (req.session && req.session.isAuthenticated) {
-      // Session is valid, return a response indicating the user is authenticated
-      res.json({ isAuthenticated: true });
-    } else {
-      // Session expired or not authenticated
-      res.json({ isAuthenticated: false });
-    }
-  });
-
-
-  app.post('/logout', (req,res) => {
-    req.session.destroy((err) => {
-        if(err)
-        {
-            return res.status(500).send('Failed to destory the session');
-        }
-        res.clearCookie('connect.sid');
-        res.redirect('/');
-    });
-});
-
-// Endpoint to get the PIN
-app.get('/getLogs', isAuthenticated, (req, res) => {
+// Protect the /getLogs route with authentication middleware
+app.get('/getLogs', authenticateToken, (req, res) => {
     if (process.env.PIN) {
         res.json({ pin: process.env.PIN });
     } else {
@@ -116,8 +29,21 @@ app.get('/getLogs', isAuthenticated, (req, res) => {
     }
 });
 
-// -----------------------
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+// Example login route that provides a JWT token after successful login
+app.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // Authenticate user (for simplicity, using static values)
+    if (username === 'admin' && password === 'password') {
+        const user = { username };  // User object (could include more data)
+        const accessToken = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ accessToken });
+    } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+    }
+});
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
 });
