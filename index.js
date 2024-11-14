@@ -18,9 +18,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 
 // Serve static files if needed (optional)
-app.use(express.static('css'));
-app.use('/javascript', express.static(path.join(__dirname, "javascript")));
-app.use(express.static('javascript'));
+
 
 
 //middleware setup!
@@ -82,8 +80,8 @@ app.post('/login', async (req,res) => {
 
 async function hashPIN(pin) 
 {
-    const encoder = new TextEncoder(); // Create an instance of TextEncoder
-    const msgBuffer = encoder.encode(pin); // Use the encode method on the instance
+    const encoder = new TextEncoder(); 
+    const msgBuffer = encoder.encode(pin); 
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray
