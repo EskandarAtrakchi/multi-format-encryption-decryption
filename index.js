@@ -99,19 +99,7 @@ function isAuthenticated(req,res,next){
 
 //changes made in this section
 // Main route page
-app.get('/', (req, res) => {
-    if (req.session.views) {
-        req.session.views++;
-    } else {
-        req.session.views = 1;
-    }
 
-    console.log(`Views: ${req.session.views}`);
-    console.log(`Session Expires in: ${(req.session.cookie.maxAge / 1000).toFixed(1)}`);
-
-    // Redirect to the external link
-    res.redirect('https://eskandaratrakchi.github.io/multi-format-encryption-decryption/');
-});
 
 
 app.get('/api/session-status', (req, res) => {
@@ -126,7 +114,7 @@ app.get('/api/session-status', (req, res) => {
   
 
 
-app.get('/logout', (req,res) => {
+app.post('/logout', (req,res) => {
     req.session.destroy((err) => {
         if(err)
         {
