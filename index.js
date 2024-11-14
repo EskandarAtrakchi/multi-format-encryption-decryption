@@ -33,7 +33,7 @@ app.use(session({
         name:'mySessionCookie',
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
-        maxAge: 30000 //setting time 
+        maxAge: 10000 //setting time 
     }
 }));
 
