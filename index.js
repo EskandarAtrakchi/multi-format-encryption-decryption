@@ -40,7 +40,7 @@ app.use(session({
 }));
 
 // Precomputed hash of the correct PIN (using SHA-256)
-const storedHashedPIN = '82f084acdaefea0ed3254cb48ac75406bdeb5eba249ae22237e00b4dceb2bf1b'; // Replace with your hashed PIN
+const storedHashedPIN = '82f084acdaefea0ed3254cb48ac75406bdeb5eba249ae22237e00b4dceb2bf1b';
 const fixedSalt = 'SOME_RANDOM_SALT'; // Fixed salt used for hashing
 
 let attemptCount = 0;
