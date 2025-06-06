@@ -8,7 +8,9 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Secure File Cache System",
   description: "A secure file encryption and caching system with AES-GCM encryption",
-    generator: 'v0.dev'
+  icons : {
+    icon: "https://github.com/EskandarAtrakchi/multi-format-encryption-decryption/blob/main/public/encryption.png?raw=true",
+  }
 }
 
 export default function RootLayout({
