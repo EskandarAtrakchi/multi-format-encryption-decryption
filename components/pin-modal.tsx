@@ -20,8 +20,7 @@ export function PinModal() {
   const LOCKOUT_TIME = 30000 // 30 seconds
 
   // Optional client fallback PIN from env for offline dev/testing
-  // You can remove this if you want ONLY server validation
-  const CLIENT_FALLBACK_PIN = process.env.NEXT_PUBLIC_CORRECT_PIN || "4321"
+  const CLIENT_FALLBACK_PIN = process.env.NEXT_PUBLIC_CORRECT_PIN || "1234"
 
   useEffect(() => {
     if (attempts >= MAX_ATTEMPTS) {
